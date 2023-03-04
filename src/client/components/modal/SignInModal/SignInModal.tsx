@@ -83,6 +83,7 @@ export const SignInModal: FC = () => {
           <div className={styles.inputList()}>
             <TextInput
               required
+              autoComplete='email'
               id="email"
               label="メールアドレス"
               onChange={formik.handleChange}
@@ -94,6 +95,7 @@ export const SignInModal: FC = () => {
 
             <TextInput
               required
+              autoComplete='current-password'
               id="password"
               label="パスワード"
               onChange={formik.handleChange}

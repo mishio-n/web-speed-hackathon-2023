@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import { Layout } from '../../components/application/Layout';
 import { ProductList } from '../../components/feature/ProductList';
@@ -21,6 +21,14 @@ export const Top: FC = () => {
     <>
       <Helmet>
         <title>買えるオーガニック</title>
+        <link
+          as="image"
+          href={
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            recommendation.product.media.find((productMedia) => productMedia.isThumbnail)!.file.filename
+          }
+          rel="preload"
+        />
       </Helmet>
       <Layout>
         <div>
