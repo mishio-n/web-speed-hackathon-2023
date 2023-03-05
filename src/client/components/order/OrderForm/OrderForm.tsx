@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
-import type { ChangeEventHandler, FC } from 'react';
-import zipcodeJa from 'zipcode-ja';
+import { type ChangeEventHandler, type FC } from 'react';
 
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
@@ -29,13 +28,34 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
     onSubmit,
   });
 
-  const handleZipcodeChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const getAddress = async (zipcode: string): Promise<{ city: string; prefecture: string }> => {
+    if (zipcode.length !== 7) {
+      return {
+        city: '',
+        prefecture: '',
+      };
+    }
+
+    const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcode}`);
+    const data = await res.json();
+    if (data.status !== 200) {
+      return {
+        city: '',
+        prefecture: '',
+      };
+    }
+
+    return {
+      city: `${data.results[0].address2} ${data.results[0].address3}`,
+      prefecture: data.results[0].address1,
+    };
+  };
+
+  const handleZipcodeChange: ChangeEventHandler<HTMLInputElement> = async (event) => {
     formik.handleChange(event);
 
     const zipCode = event.target.value;
-    const address = zipcodeJa[zipCode]?.address ?? [];
-    const prefecture = address.shift();
-    const city = address.join(' ');
+    const { city, prefecture } = await getAddress(zipCode);
 
     formik.setFieldValue('prefecture', prefecture);
     formik.setFieldValue('city', city);
