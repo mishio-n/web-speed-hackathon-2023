@@ -5,7 +5,6 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import topLevelAwait from 'vite-plugin-top-level-await';
-import wasm from 'vite-plugin-wasm';
 
 import { getFileList } from './tools/get_file_list';
 
@@ -23,15 +22,8 @@ export default defineConfig(async () => {
   const videos = await getPublicFileList(path.resolve(publicDir, 'videos'));
 
   return {
-    build: {
-      cssCodeSplit: true,
-      cssTarget: 'es6',
-      minify: true,
-      target: 'es2015',
-    },
     plugins: [
       react(),
-      wasm(),
       topLevelAwait(),
       ViteEjsPlugin({
         module: '/src/client/index.tsx',

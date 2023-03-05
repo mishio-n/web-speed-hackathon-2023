@@ -38,9 +38,6 @@ async function init(): Promise<void> {
       deflate: {
         flush: zlib.constants.Z_SYNC_FLUSH,
       },
-      filter(content_type) {
-        return /text/i.test(content_type);
-      },
       gzip: {
         flush: zlib.constants.Z_SYNC_FLUSH,
       },

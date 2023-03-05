@@ -14,7 +14,7 @@ import { loadFonts } from '../../utils/load_fonts';
 
 import styles from './OrderComplete.module.scss';
 
-export const OrderComplete: FC = () => {
+const OrderComplete: FC = () => {
   const navigate = useNavigate();
   const [isReadyFont, setIsReadyFont] = useState(false);
   const { authUserLoading, isAuthUser } = useAuthUser();
@@ -71,3 +71,5 @@ export const OrderComplete: FC = () => {
     </>
   );
 };
+
+export default OrderComplete;

@@ -9,7 +9,7 @@ import { useRecommendation } from '../../hooks/useRecommendation';
 
 import * as styles from './Top.styles';
 
-export const Top: FC = () => {
+const Top: FC = () => {
   const { recommendation } = useRecommendation();
   const { features } = useFeatures();
 
@@ -33,7 +33,6 @@ export const Top: FC = () => {
       <Layout>
         <div>
           <ProductHeroImage product={recommendation.product} title="今週のオススメ" />
-
           <div className={styles.featureList()}>
             {features.map((featureSection) => {
               return (
@@ -49,3 +48,5 @@ export const Top: FC = () => {
     </>
   );
 };
+
+export default Top;

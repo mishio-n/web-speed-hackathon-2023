@@ -10,9 +10,7 @@ const FOOTER_LINK_ITEMS = ['利用規約', 'お問い合わせ', 'Q&A', '運営�
 export const Footer: FC = () => {
   return (
     <footer className={styles.container}>
-      <ul
-        className={styles.itemList}
-      >
+      <ul className={styles.itemList}>
         {FOOTER_LINK_ITEMS.map((item) => (
           <li key={item} className={styles.item}>
             {item}
@@ -20,7 +18,7 @@ export const Footer: FC = () => {
         ))}
       </ul>
       <NavLink to="/">
-        <Image src="/icons/logo.svg" />
+        <Image height={'32px'} src="/icons/logo.svg" width={'205px'} />
       </NavLink>
     </footer>
   );
